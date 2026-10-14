@@ -17,3 +17,4 @@ https://github.com/yzoz/python-asymmetric-cryptography - без сайта
 https://github.com/yzoz/option-exchange - сайт будет
 https://github.com/yzoz/rnn-market-prediction - legacy для market-volatility-nn - без сайта
 Задавай столько вопросов сколько нужно! Если есть спорные/противоречащие друг другу решения - спрашивай из какой версии SPEC брать актуальное.
+!!!НЕ ЭКОНОМЬ ТОКЕНЫ!!!
