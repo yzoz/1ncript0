@@ -124,6 +124,7 @@ button:focus-visible,
   border-color: var(--line);
 }
 .nav {
+  position: relative;
   height: 70px;
   display: flex;
   align-items: center;
@@ -159,11 +160,6 @@ button:focus-visible,
   color: var(--text);
   padding: 8px 12px;
 }
-.nav-drop {
-  position: relative;
-  padding: 8px 0 16px;
-  margin: -8px 0 -16px;
-}
 .nav-drop-toggle {
   background: none;
   border: 0;
@@ -192,8 +188,8 @@ button:focus-visible,
 .nav-drop-menu {
   position: absolute;
   top: 100%;
-  left: -18px;
-  min-width: 230px;
+  right: 0;
+  width: max-content;
   margin: 0;
   padding: 8px 0;
   list-style: none;
