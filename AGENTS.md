@@ -13,3 +13,4 @@
 - Внешние ссылки — всегда `target="_blank" rel="noreferrer"`.
 - Деплой: `npm run build` → `dist/` → nginx со SPA-fallback (`try_files $uri $uri/ /index.html`), см. `deploy/nginx.conf.example`.
 - Пакетный менеджер: npm. `.txt/` — рабочие материалы, в сборку не входят.
+- Детали в README.md
