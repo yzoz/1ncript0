@@ -39,6 +39,14 @@
       -webkit-font-smoothing: antialiased;
     }
 
+    a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 0.25em;
+      transition: color 0.25s;
+    }
+    a:hover { color: var(--accent); }
+
     .progress-bar {
       position: fixed;
       top: 0;
@@ -72,6 +80,7 @@
       font-size: 1rem;
       letter-spacing: 0.02em;
       color: var(--accent);
+      text-decoration: none;
     }
     .nav-links {
       display: none;
@@ -164,6 +173,7 @@
       background: var(--text-muted);
       transition: all 0.3s;
       display: block;
+      text-decoration: none;
     }
     .side-dots a.active {
       background: var(--accent);
@@ -288,6 +298,12 @@
       color: var(--accent-soft);
       margin-bottom: 0.5rem;
     }
+    .cto-title a {
+      color: inherit;
+      text-decoration: underline;
+      text-underline-offset: 0.2em;
+    }
+    .cto-title a:hover { color: var(--accent); }
     .cto-text {
       font-size: 0.95rem;
       color: var(--text-secondary);
@@ -358,7 +374,7 @@
     }
     .project-card.flagship:hover { background: #1C1C1C; }
     .project-header {
-      padding: 1.5rem 1.5rem 1.25rem;
+      padding: 1.5rem 1.5rem 0.75rem;
       cursor: pointer;
       display: flex;
       justify-content: space-between;
@@ -393,6 +409,7 @@
       color: var(--accent-soft);
       font-size: 0.9rem;
       letter-spacing: 0.05em;
+      margin-top: 0.35rem;
     }
     .project-toggle {
       flex-shrink: 0;
@@ -408,6 +425,53 @@
       transform: rotate(45deg);
       color: var(--accent);
     }
+
+    /* Ссылки: две ячейки, как у SIT — подчёркнуты */
+    .project-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem 1.5rem;
+      padding: 0 1.5rem 1.25rem;
+      min-height: 1.6rem;
+    }
+    .project-card.flagship .project-links {
+      border: 1px solid var(--accent);
+      margin: 0 1.5rem 1.25rem;
+      padding: 0.65rem 1rem;
+    }
+    .project-link {
+      font-family: var(--font-eyebrow);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      text-decoration: underline;
+      text-underline-offset: 0.3em;
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      text-align: left;
+      font: inherit;
+      font-family: var(--font-eyebrow);
+      font-size: 0.9rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .project-link:hover { color: var(--accent); }
+    .project-link.soon {
+      color: var(--text-muted);
+      text-decoration-style: dashed;
+    }
+    .project-link.soon:hover { color: var(--text-secondary); }
+    .project-card.flagship .project-link {
+      color: var(--accent);
+    }
+    .project-card.flagship .project-link.soon {
+      color: var(--accent-soft);
+      text-decoration-style: dashed;
+    }
+
     .project-body {
       max-height: 0;
       overflow: hidden;
@@ -521,6 +585,39 @@
       transform: translateY(0);
     }
 
+    /* Модалка */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(10, 10, 10, 0.72);
+      backdrop-filter: blur(12px);
+      z-index: 1100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      min-width: min(20rem, calc(100% - 3rem));
+      text-align: center;
+    }
+    .modal-box p {
+      font-family: var(--font-eyebrow);
+      font-size: 1.35rem;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin: 0;
+    }
+
     @media (min-width: 768px) {
       .nav-links { display: flex; }
       .burger { display: none; }
@@ -542,7 +639,12 @@
         padding: 3rem 2.5rem;
         margin: 0;
       }
-      .project-header { padding: 1.75rem 2rem 1.5rem; }
+      .project-header { padding: 1.75rem 2rem 0.85rem; }
+      .project-links { padding: 0 2rem 1.5rem; }
+      .project-card.flagship .project-links {
+        margin: 0 2rem 1.5rem;
+        padding: 0.75rem 1.1rem;
+      }
       .project-body-inner { padding: 0 2rem 1.75rem; }
       .project-card.flagship .project-title { font-size: 1.6rem; }
     }
@@ -552,13 +654,23 @@
       section { padding: 6.5rem 0; }
       .exp-grid { grid-template-columns: repeat(4, 1fr); }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .hero-name, .hero-role, .hero-manifest, .hero-scroll {
+        opacity: 1;
+        transform: none;
+        animation: none;
+        transition: none;
+      }
+      .hero-scroll { transform: translateX(-50%); }
+    }
   </style>
 </head>
 <body>
   <div class="progress-bar" id="progress"></div>
 
   <nav class="nav" id="nav">
-    <div class="nav-logo">ЕН</div>
+    <a class="nav-logo" href="#hero">1.0</a>
     <ul class="nav-links">
       <li><a href="#about">О себе</a></li>
       <li><a href="#spec">Специализация</a></li>
@@ -567,8 +679,8 @@
       <li><a href="#contacts">Контакты</a></li>
     </ul>
     <div style="display:flex;align-items:center;gap:1rem;">
-      <button class="lang-switch" id="langBtn">RU / EN</button>
-      <button class="burger" id="burger" aria-label="Меню">
+      <button class="lang-switch" id="langBtn" type="button">RU / EN</button>
+      <button class="burger" id="burger" aria-label="Меню" type="button">
         <span></span><span></span><span></span>
       </button>
     </div>
@@ -613,7 +725,7 @@
     <div class="container">
       <div class="cto-inner reveal">
         <div class="cto-label">Текущая роль</div>
-        <div class="cto-title">CTO · <a href="https://daosit.com">SIT</a></div>
+        <div class="cto-title">CTO · <a href="https://daosit.com" target="_blank" rel="noopener">SIT</a></div>
         <p class="cto-text">
           Техническая стратегия и архитектура продуктов в сферах PWA, Telegram-ботов, API-интеграций, AI и fintech.
           Формирование команд, выбор стека, масштабируемость, безопасность и соответствие регуляторным требованиям.
@@ -689,146 +801,209 @@
       <h2 class="reveal">То, что сделано руками</h2>
       <div class="projects-list">
 
+        <!-- Yat -->
         <div class="project-card flagship reveal">
           <div class="project-header" onclick="toggleProject(this)">
             <div>
-              <div class="project-title">Yat (yatledger)</div>
-              <div class="project-meta">Флагман · DAG · PWA · Rust · Python</div>
+              <div class="project-title">Yat</div>
+              <div class="project-meta">DAG · PWA · Rust</div>
               <span class="project-badge">открытый реестр ценностей</span>
             </div>
             <div class="project-toggle">+</div>
           </div>
+          <div class="project-links" onclick="event.stopPropagation()">
+            <button type="button" class="project-link soon" onclick="openDev()">Сайт</button>
+            <a class="project-link" href="https://github.com/yatledger" target="_blank" rel="noopener">GitHub</a>
+          </div>
           <div class="project-body">
             <div class="project-body-inner">
-              <p>
-                Открытый, неизменяемый и доказуемый реестр ценностей на DAG.
-                Не криптовалюта и не платёжка — система обмена правами и обязательствами, где каждая транзакция подтверждает предыдущую.
-              </p>
-              <p>
-                Сделал клиентскую часть: PWA-кошелёк на Vue + Quasar с генерацией ключей в браузере, подписью транзакций и шифрованием.
-                Рядом — Python GraphQL API и Rust-ядро.
-                Это тот проект, где всё, что я умею, встречается в одной точке.
-              </p>
+              <p>Открытый, неизменяемый и доказуемый реестр ценностей на DAG. Не криптовалюта и не платёжка — система обмена правами и обязательствами, где каждая транзакция подтверждает предыдущую.</p>
+              <p>Сделал клиентскую часть: PWA-кошелёк на Vue + Quasar с генерацией ключей в браузере, подписью транзакций и шифрованием. Рядом — Python GraphQL API и Rust-ядро. Это тот проект, где всё, что я умею, встречается в одной точке.</p>
             </div>
           </div>
         </div>
 
+        <!-- GreenWord -->
         <div class="project-card reveal">
           <div class="project-header" onclick="toggleProject(this)">
             <div>
-              <div class="project-title">GreenWord.ru</div>
-              <div class="project-meta">2007 — н.в.</div>
-              <span class="project-badge">18+ лет</span>
+              <div class="project-title">GreenWord</div>
+              <div class="project-meta">Movable Type· Blog · Photo</div>
+              <span class="project-badge">~20 лет</span>
             </div>
             <div class="project-toggle">+</div>
           </div>
+          <div class="project-links" onclick="event.stopPropagation()">
+            <a class="project-link" href="https://greenword.ru/" target="_blank" rel="noopener">Сайт</a>
+            <span></span>
+          </div>
           <div class="project-body">
             <div class="project-body-inner">
-              <p>
-                Полный цикл: от дизайна и собственных CMS-расширений до хостинга, SEO, монетизации и управления контентом.
-                Один из самых долгих и спокойных проектов. Он до сих пор живёт и приносит пользу.
-              </p>
+              <p>Полный цикл: от дизайна и собственных CMS-расширений до хостинга, SEO, монетизации и управления контентом. Один из самых долгих и спокойных проектов. Он до сих пор живёт и приносит пользу.</p>
             </div>
           </div>
         </div>
 
+        <!-- market-volatility-nn -->
         <div class="project-card reveal">
           <div class="project-header" onclick="toggleProject(this)">
             <div>
-              <div class="project-title">python-option-calculator</div>
-              <div class="project-meta">PyPI · Open Source</div>
-              <div class="project-stars">✪ 150</div>
+              <div class="project-title">Market Volatility AI</div>
+              <div class="project-meta">RNN · CNN · Crypto</div>
             </div>
             <div class="project-toggle">+</div>
           </div>
+          <div class="project-links" onclick="event.stopPropagation()">
+            <button type="button" class="project-link soon" onclick="openDev()">Сайт</button>
+            <a class="project-link" href="https://github.com/yzoz/market-volatility-nn" target="_blank" rel="noopener">GitHub</a>
+          </div>
           <div class="project-body">
             <div class="project-body-inner">
-              <p>
-                Самодостаточный пакет для анализа ванильных опционов.
-                Чистая реализация модели Black-Scholes-Merton на чистом Python (без NumPy и SciPy): теоретическая цена, греки, портфельный P&amp;L, визуализация и поиск дельта-нейтральной цены.
-                Лежит на PyPI и до сих пор собирает звёзды. Классический пример того, как можно сделать полезный инструмент без лишних зависимостей.
-              </p>
+              <p>Прогноз волатильности крипты: RNN-регрессия будущего значения и CNN-классификация направления движения.</p>
             </div>
           </div>
         </div>
 
+        <!-- Narasimha -->
         <div class="project-card reveal">
           <div class="project-header" onclick="toggleProject(this)">
             <div>
-              <div class="project-title">Narasimha Crypto Financial</div>
+              <div class="project-title">Narasimha / Crypto Financial</div>
               <div class="project-meta">Real-time · FastAPI · Quasar</div>
               <span class="project-badge">с нуля</span>
             </div>
             <div class="project-toggle">+</div>
           </div>
+          <div class="project-links" onclick="event.stopPropagation()">
+            <button type="button" class="project-link soon" onclick="openDev()">Сайт</button>
+            <button type="button" class="project-link soon" onclick="openDev()">GitHub</button>
+          </div>
           <div class="project-body">
             <div class="project-body-inner">
-              <p>
-                С нуля спроектировал и запустил платформу real-time аналитики крипторынка.
-                Backend на FastAPI + InfluxDB, фронт на Quasar с ApexCharts, Telegram-бот с торговыми сигналами.
-                Полный цикл: данные → аналитика → интерфейс → бот → инфраструктура.
-              </p>
+              <p>С нуля спроектировал и запустил платформу real-time аналитики крипторынка. Backend на FastAPI + InfluxDB, фронт на Quasar с ApexCharts, Telegram-бот с торговыми сигналами. Полный цикл: данные → аналитика → интерфейс → бот → инфраструктура.</p>
             </div>
           </div>
         </div>
 
+        <!-- Incripto -->
         <div class="project-card reveal">
           <div class="project-header" onclick="toggleProject(this)">
             <div>
-              <div class="project-title">Entropy Money</div>
+              <div class="project-title">Incripto crypto tunnel</div>
+              <div class="project-meta">Python · Websockets · NaCL</div>
+            </div>
+            <div class="project-toggle">+</div>
+          </div>
+          <div class="project-links" onclick="event.stopPropagation()">
+            <button type="button" class="project-link soon" onclick="openDev()">Сайт</button>
+            <a class="project-link" href="https://github.com/incripto" target="_blank" rel="noopener">GitHub</a>
+          </div>
+          <div class="project-body">
+            <div class="project-body-inner">
+              <p>Приватный канал: без почты, без телефона, без пароля, без IP. Не ещё один аккаунт — туннель, в котором нечему светиться.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Entropy -->
+        <div class="project-card reveal">
+          <div class="project-header" onclick="toggleProject(this)">
+            <div>
+              <div class="project-title">Entropy money</div>
               <div class="project-meta">Go · Ed25519 · Mutual Credit</div>
             </div>
             <div class="project-toggle">+</div>
           </div>
+          <div class="project-links" onclick="event.stopPropagation()">
+            <span></span>
+            <a class="project-link" href="https://github.com/yzoz/entropy" target="_blank" rel="noopener">GitHub</a>
+          </div>
           <div class="project-body">
             <div class="project-body-inner">
-              <p>
-                Консольная утилита на Go для партнёрских взаимозачётов на подписанных контрактах (IOU / mutual credit).
-                Без блокчейна, без майнинга и центрального сервера. Участники выпускают, встречно подписывают и погашают долговые обязательства, обмениваясь ими через файлы.
-                Балансы не хранятся — они вычисляются из набора подписанных контрактов. Чистая криптография (Ed25519 + Argon2id), аудитируемость и понятная модель.
-              </p>
+              <p>Консольная утилита на Go для партнёрских взаимозачётов на подписанных контрактах (IOU / mutual credit). Без блокчейна, без майнинга и центрального сервера. Участники выпускают, встречно подписывают и погашают долговые обязательства, обмениваясь ими через файлы. Балансы не хранятся — они вычисляются из набора подписанных контрактов. Чистая криптография (Ed25519 + Argon2id), аудитируемость и понятная модель.</p>
             </div>
           </div>
         </div>
 
+        <!-- option-calculator -->
         <div class="project-card reveal">
           <div class="project-header" onclick="toggleProject(this)">
             <div>
-              <div class="project-title">python-asymmetric-cryptography</div>
+              <div class="project-title">Vanilla option calculator</div>
+              <div class="project-meta">PyPI · Open Source · Black-Scholes</div>
+              <div class="project-stars">✪ 150</div>
+            </div>
+            <div class="project-toggle">+</div>
+          </div>
+          <div class="project-links" onclick="event.stopPropagation()">
+            <a class="project-link" href="https://pypi.org/project/option-calculator/" target="_blank" rel="noopener">PyPI</a>
+            <a class="project-link" href="https://github.com/yzoz/python-option-calculator" target="_blank" rel="noopener">GitHub</a>
+          </div>
+          <div class="project-body">
+            <div class="project-body-inner">
+              <p>Самодостаточный пакет для анализа ванильных опционов. Чистая реализация модели Black-Scholes-Merton на чистом Python (без NumPy и SciPy): теоретическая цена, греки, портфельный P&amp;L, визуализация и поиск дельта-нейтральной цены. Лежит на PyPI и до сих пор собирает звёзды. Классический пример того, как можно сделать полезный инструмент без лишних зависимостей.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- asymmetric -->
+        <div class="project-card reveal">
+          <div class="project-header" onclick="toggleProject(this)">
+            <div>
+              <div class="project-title">Asymmetric cryptography</div>
               <div class="project-meta">Обучающий · RSA · Pure Python</div>
             </div>
             <div class="project-toggle">+</div>
           </div>
+          <div class="project-links" onclick="event.stopPropagation()">
+            <span></span>
+            <a class="project-link" href="https://github.com/yzoz/python-asymmetric-cryptography" target="_blank" rel="noopener">GitHub</a>
+          </div>
           <div class="project-body">
             <div class="project-body-inner">
-              <p>
-                Максимально простая и читаемая реализация асимметричного шифрования в духе RSA на чистом Python.
-                Без сторонних библиотек, с подробным разбором математики, блочного кодирования текста и даже демонстрацией атаки факторизации.
-                Написан так, чтобы его можно было разобрать и понять, а не просто использовать.
-              </p>
+              <p>Максимально простая и читаемая реализация асимметричного шифрования в духе RSA на чистом Python. Без сторонних библиотек, с подробным разбором математики, блочного кодирования текста и даже демонстрацией атаки факторизации. Написан так, чтобы его можно было разобрать и понять, а не просто использовать.</p>
             </div>
           </div>
         </div>
 
+        <!-- option-exchange -->
         <div class="project-card reveal">
           <div class="project-header" onclick="toggleProject(this)">
             <div>
-              <div class="project-title">AI/ML-эксперименты</div>
-              <div class="project-meta">PyTorch · TensorFlow · LangChain</div>
+              <div class="project-title">Option exchange</div>
+              <div class="project-meta">legacy · ETH/BTC · Market</div>
+              <span class="project-badge">α</span>
             </div>
             <div class="project-toggle">+</div>
           </div>
+          <div class="project-links" onclick="event.stopPropagation()">
+            <button type="button" class="project-link soon" onclick="openDev()">Сайт</button>
+            <a class="project-link" href="https://github.com/yzoz/option-exchange" target="_blank" rel="noopener">GitHub</a>
+          </div>
           <div class="project-body">
             <div class="project-body-inner">
-              <p>
-                <strong>market-volatility-nn</strong> — прогноз волатильности крипты: RNN-регрессия будущего значения + CNN-классификация направления движения.
-              </p>
-              <p>
-                <strong>rnn-market-prediction</strong> — первая legacy-попытка реализовать краткосрочное прогнозирование рыночных цен с помощью рекуррентной нейронной сети на TensorFlow.
-              </p>
-              <p>
-                Также работа с PyTorch, LangChain и построением чат-ботов.
-              </p>
+              <p>Демонстрационная биржа опционов на пару ETH/BTC. Виртуальные средства, встречные заявки сходятся сами, P/L считается по модели. Не настоящие деньги — собранная книга заявок, которую можно запустить и разобрать.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- rnn -->
+        <div class="project-card reveal">
+          <div class="project-header" onclick="toggleProject(this)">
+            <div>
+              <div class="project-title">RNN market prediction</div>
+              <div class="project-meta">TensorFlow · Accumulation/Distribution · LSTM</div>
+              <span class="project-badge">legacy</span>
+            </div>
+            <div class="project-toggle">+</div>
+          </div>
+          <div class="project-links" onclick="event.stopPropagation()">
+            <span></span>
+            <a class="project-link" href="https://github.com/yzoz/rnn-market-prediction" target="_blank" rel="noopener">GitHub</a>
+          </div>
+          <div class="project-body">
+            <div class="project-body-inner">
+              <p>Первая legacy-попытка реализовать краткосрочное прогнозирование рыночных цен с помощью рекуррентной нейронной сети на TensorFlow.</p>
             </div>
           </div>
         </div>
@@ -933,6 +1108,12 @@
     <div class="container">Евгений Носов · 2026</div>
   </footer>
 
+  <div class="modal-overlay" id="devModal" role="dialog" aria-modal="true" aria-label="in development">
+    <div class="modal-box">
+      <p>in development</p>
+    </div>
+  </div>
+
   <script>
     const progress = document.getElementById('progress');
     window.addEventListener('scroll', () => {
@@ -944,9 +1125,7 @@
 
     const burger = document.getElementById('burger');
     const mobileMenu = document.getElementById('mobileMenu');
-    burger.addEventListener('click', () => {
-      mobileMenu.classList.toggle('open');
-    });
+    burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
     mobileMenu.querySelectorAll('a').forEach(a => {
       a.addEventListener('click', () => mobileMenu.classList.remove('open'));
     });
@@ -969,6 +1148,18 @@
         body.style.maxHeight = body.scrollHeight + 'px';
       }
     }
+
+    function openDev() {
+      document.getElementById('devModal').classList.add('open');
+    }
+    document.getElementById('devModal').addEventListener('click', (e) => {
+      if (e.target.id === 'devModal') e.currentTarget.classList.remove('open');
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') document.getElementById('devModal').classList.remove('open');
+    });
+
+    document.getElementById('langBtn').addEventListener('click', openDev);
 
     const reveals = document.querySelectorAll('.reveal');
     const observer = new IntersectionObserver((entries) => {
@@ -1013,10 +1204,6 @@
     sections.forEach(id => {
       const el = document.getElementById(id);
       if (el) sectionObserver.observe(el);
-    });
-
-    document.getElementById('langBtn').addEventListener('click', () => {
-      alert('English version — coming soon');
     });
   </script>
 </body>
