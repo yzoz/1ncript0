@@ -34,6 +34,13 @@ body {
   font-size: 16px;
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
+main {
+  flex: 1;
+  overflow-x: clip;
 }
 a {
   color: inherit;
@@ -151,6 +158,63 @@ button:focus-visible,
   border: 1px solid var(--line);
   color: var(--text);
   padding: 8px 12px;
+}
+.nav-drop {
+  position: relative;
+  padding: 8px 0 16px;
+  margin: -8px 0 -16px;
+}
+.nav-drop-toggle {
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.84rem;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.nav-drop-toggle:hover,
+.nav-drop-toggle.active {
+  color: var(--text);
+}
+.nav-drop-arrow {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--faint);
+  transition: transform 0.25s;
+}
+.nav-drop-toggle[aria-expanded="true"] .nav-drop-arrow {
+  transform: rotate(180deg);
+}
+.nav-drop-menu {
+  position: absolute;
+  top: 100%;
+  left: -18px;
+  min-width: 230px;
+  margin: 0;
+  padding: 8px 0;
+  list-style: none;
+  background: #101012;
+  border: 1px solid var(--line);
+  display: none;
+  z-index: 30;
+}
+.nav-drop-menu.open {
+  display: block;
+}
+.nav-drop-menu a {
+  display: block;
+  padding: 10px 18px;
+  font-size: 0.84rem;
+  color: var(--muted);
+  transition: color 0.2s, background 0.2s;
+}
+.nav-drop-menu a:hover {
+  color: var(--text);
+  background: #17171a;
 }
 .progress-bar {
   position: fixed;
@@ -407,6 +471,75 @@ button:focus-visible,
 }
 .project-toggle[aria-expanded="true"] .toggle-mark {
   transform: rotate(45deg);
+}
+.services-grid {
+  border-top: 1px solid var(--line);
+}
+.service-card {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 3vw, 30px);
+  padding: clamp(18px, 2.6vw, 26px) 0;
+  border-bottom: 1px solid var(--line);
+  transition: color 0.2s;
+}
+.service-card:hover {
+  color: var(--accent);
+}
+.services-index {
+  color: var(--faint);
+}
+.service-card-title {
+  flex: 1;
+  font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  font-weight: 500;
+}
+.breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  padding-top: clamp(28px, 4vw, 44px);
+  color: var(--faint);
+}
+.breadcrumbs a {
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.breadcrumbs a:hover {
+  color: var(--text);
+}
+.breadcrumbs-current {
+  color: var(--text);
+}
+.service-hero {
+  padding: clamp(38px, 5.5vw, 72px) 0 clamp(28px, 3.5vw, 44px);
+}
+.service-hero h1 {
+  font-size: clamp(2.4rem, 5.4vw, 4.6rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  font-weight: 500;
+  margin: 0;
+}
+.service-space {
+  min-height: clamp(180px, 34vh, 360px);
+}
+.page-enter-active,
+.page-leave-active {
+  transition:
+    transform 0.25s ease,
+    opacity 0.25s ease;
+}
+.page-enter-from {
+  transform: translateX(42px);
+  opacity: 0;
+}
+.page-leave-to {
+  transform: translateX(-42px);
+  opacity: 0;
 }
 .featured-grid {
   display: grid;
@@ -822,6 +955,28 @@ footer {
   .navlinks a {
     padding: 12px 0;
     border-bottom: 1px solid var(--line);
+  }
+  .nav-drop {
+    padding: 0;
+    margin: 0;
+  }
+  .nav-drop-toggle {
+    width: 100%;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-drop-menu {
+    position: static;
+    min-width: 0;
+    border: 0;
+    border-top: 1px solid var(--line);
+    background: transparent;
+    padding: 0 0 4px 14px;
+    margin-bottom: 8px;
+  }
+  .nav-drop-menu a {
+    padding: 10px 0;
   }
   .hero {
     min-height: auto;

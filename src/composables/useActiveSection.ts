@@ -1,10 +1,15 @@
-import { onMounted, onUnmounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 
 const active = ref('hero')
-let observer: IntersectionObserver | null = null
 
 export function useActiveSection () {
-  onMounted(() => {
+  const route = useRoute()
+  let observer: IntersectionObserver | null = null
+
+  function setup () {
+    observer?.disconnect()
+    observer = null
     const sections = document.querySelectorAll('main section[id]')
     observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
@@ -14,6 +19,13 @@ export function useActiveSection () {
       })
     }, { rootMargin: '-30% 0px -60% 0%' })
     sections.forEach((section) => observer?.observe(section))
+  }
+
+  onMounted(() => {
+    setup()
+    watch(() => route.fullPath, () => {
+      window.setTimeout(setup, 320)
+    })
   })
 
   onUnmounted(() => {

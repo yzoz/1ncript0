@@ -8,6 +8,7 @@ const dots = [
   { section: 'projects', label: 'Проекты' },
   { section: 'competencies', label: 'Компетенции' },
   { section: 'experience', label: 'Опыт' },
+  { section: 'services', label: 'Услуги' },
   { section: 'contacts', label: 'Контакты' }
 ]
 </script>
