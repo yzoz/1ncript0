@@ -1,0 +1,16 @@
+<template>
+  <section id="competencies" class="section">
+    <div class="wrap">
+      <div class="section-head"><div><p class="eyebrow mono">02 / Практика</p><h2>Компетенции<span class="muted">.</span></h2></div><p>Технологии имеют смысл, когда помогают решать конкретную задачу. Поэтому важнее не список инструментов, а способ мышления и подтверждающие проекты.</p></div>
+      <div class="competencies">
+        <article class="competency"><div class="competency-number mono">01 — Architecture</div><h3>Архитектура и распределённые системы</h3><p>Проектирование компонентов и их взаимодействия, API, распределённое состояние, согласование данных, графы транзакций и криптографическая проверка операций.</p><div class="evidence"><span>Проекты</span>Yat · Entropy money</div></article>
+        <article class="competency"><div class="competency-number mono">02 — Full-stack</div><h3>Full-stack-разработка и PWA</h3><p>Серверная и клиентская части, интеграции, интерфейсы, офлайн-capable веб-приложения и эксплуатация продукта на всём пути — от данных до пользователя.</p><div class="evidence"><span>Проекты</span>Yat · GreenWord · Narasimha</div></article>
+        <article class="competency"><div class="competency-number mono">03 — AI / Data</div><h3>AI, машинное обучение и данные</h3><p>Работа с временными рядами, RNN/CNN-эксперименты, аналитическая визуализация, чат-боты, AI-агенты и среда их выполнения.</p><div class="evidence"><span>Проекты</span>Volatility AI · RNN market prediction · Narasimha</div></article>
+        <article class="competency"><div class="competency-number mono">04 — Fintech</div><h3>Fintech и криптография</h3><p>Финансовое моделирование, опционная аналитика, учёт обязательств, цифровые подписи и исследование криптографических протоколов.</p><div class="evidence"><span>Проекты</span>Yat · Entropy money · Option calculator</div></article>
+        <article class="competency"><div class="competency-number mono">05 — Leadership</div><h3>Техническое лидерство</h3><p>Техническая стратегия, архитектурные решения, организация разработки, выбор стека и связь продуктовых целей с инженерной реализацией.</p><div class="evidence"><span>Контекст</span>SIT · собственные продукты</div></article>
+        <article class="competency"><div class="competency-number mono">06 — Engineering</div><h3>Инфраструктура и качество</h3><p>Linux, Nginx, CI/CD, интеграция компонентов, поддерживаемый код и внимание к ограничениям системы ещё до того, как они станут проблемой.</p><div class="evidence"><span>Подход</span>От архитектуры и данных — к коду</div></article>
+      </div>
+      <div class="stack-block"><h3>Рабочий стек</h3><div class="stack-list"><span>Python</span><span>Go</span><span>Rust</span><span>JavaScript / TypeScript</span><span>FastAPI</span><span>Django REST</span><span>GraphQL</span><span>Vue</span><span>Nuxt</span><span>Quasar</span><span>Vite</span><span>PostgreSQL</span><span>MongoDB</span><span>InfluxDB</span><span>Redis</span><span>RabbitMQ</span><span>TensorFlow</span><span>PyTorch</span><span>LangChain</span><span>Linux</span><span>Nginx</span><span>Docker</span><span>CI/CD</span><span>Ed25519</span><span>DAG</span><span>Raft / OpenRaft</span></div></div>
+    </div>
+  </section>
+</template>

@@ -1,0 +1,19 @@
+server {
+  listen 80;
+  server_name _;
+
+  root /var/www/1ncript0;
+  index index.html;
+
+  gzip on;
+  gzip_types text/css application/javascript application/json image/svg+xml;
+
+  location /assets/ {
+    expires 1y;
+    add_header Cache-Control "public, immutable";
+  }
+
+  location / {
+    try_files $uri $uri/ /index.html;
+  }
+}
