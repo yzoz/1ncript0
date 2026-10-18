@@ -1,6 +1,7 @@
 export interface Service {
   slug: string
   title: string
+  summary?: string
 }
 
 export const services: Service[] = [

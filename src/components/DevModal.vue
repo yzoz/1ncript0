@@ -3,6 +3,7 @@ import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 import { closeDevModal, devModalProject, devModalTrigger } from '../devModal'
 
 const closeButton = ref<HTMLElement | null>(null)
+const ready = ref(false)
 let lastTrigger: HTMLElement | null = null
 
 function onKeydown (event: KeyboardEvent) {
@@ -24,12 +25,15 @@ watch(devModalProject, async (project) => {
   }
 })
 
-onMounted(() => window.addEventListener('keydown', onKeydown))
+onMounted(() => {
+  ready.value = true
+  window.addEventListener('keydown', onKeydown)
+})
 onUnmounted(() => window.removeEventListener('keydown', onKeydown))
 </script>
 
 <template>
-  <Teleport to="body">
+  <Teleport v-if="ready" to="body">
     <div v-if="devModalProject" class="modal-backdrop" role="presentation" @click.self="closeDevModal">
       <section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalContext">
         <div class="modal-top">

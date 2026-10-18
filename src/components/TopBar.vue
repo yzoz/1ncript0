@@ -67,20 +67,20 @@ onUnmounted(() => {
       <nav id="navlinks" class="navlinks" :class="{ open: menuOpen }" aria-label="Основная навигация">
         <RouterLink v-for="link in links" :key="link.href" :to="'/' + link.href" :class="{ active: '#' + active === link.href }" @click="closeMenu">{{ link.label }}</RouterLink>
         <div class="nav-drop" @keydown.esc="closeDrop">
-          <button
+          <a
             class="nav-drop-toggle"
             :class="{ active: active === 'services' || route.name === 'service' }"
-            type="button"
+            href="/#services"
             :aria-expanded="dropOpen"
             aria-controls="services-menu"
-            @click="toggleDrop"
+            @click.prevent="toggleDrop"
           >
             Услуги
             <span class="nav-drop-arrow" aria-hidden="true">↓</span>
-          </button>
+          </a>
           <ul id="services-menu" class="nav-drop-menu" :class="{ open: dropOpen }">
             <li v-for="item in services" :key="item.slug">
-              <RouterLink :to="'/services/' + item.slug" @click="closeMenu">{{ item.title }}</RouterLink>
+              <RouterLink :to="'/services/' + item.slug + '/'" @click="closeMenu">{{ item.title }}</RouterLink>
             </li>
           </ul>
         </div>

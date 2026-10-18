@@ -13,7 +13,7 @@ import { services } from '../data/services'
           v-for="(item, i) in services"
           :key="item.slug"
           class="service-card"
-          :to="'/services/' + item.slug"
+          :to="'/services/' + item.slug + '/'"
         >
           <span class="mono services-index">{{ String(i + 1).padStart(2, '0') }}</span>
           <span class="service-card-title">{{ item.title }}</span>

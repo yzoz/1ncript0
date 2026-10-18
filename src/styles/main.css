@@ -952,10 +952,6 @@ footer {
     padding: 12px 0;
     border-bottom: 1px solid var(--line);
   }
-  .nav-drop {
-    padding: 0;
-    margin: 0;
-  }
   .nav-drop-toggle {
     width: 100%;
     justify-content: space-between;
@@ -964,6 +960,7 @@ footer {
   }
   .nav-drop-menu {
     position: static;
+    width: auto;
     min-width: 0;
     border: 0;
     border-top: 1px solid var(--line);
